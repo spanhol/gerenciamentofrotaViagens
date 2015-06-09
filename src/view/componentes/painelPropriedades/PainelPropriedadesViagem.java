@@ -743,18 +743,6 @@ public class PainelPropriedadesViagem extends PainelPropriedades<ViagemDao, Viag
 		botoes.getChildren().add(0, relatorioViagem);
 		relatorioViagem.setOnAction((ActionEvent event) -> {
 			if (selecionado != null) {
-				ViagemWrapper e = valida(true);
-				if (e != null) {
-					limpaErro();
-					if (!dao.atualizar(e.get())) {
-						JOptionPane.showMessageDialog(null, "Aviso: Não foi possivel atualizar. Imprimindo versão salva.");
-					} else {
-						setPropriedades(e);
-					}
-					dirty.set(true);	//dispara listener em CadCaminhao
-				} else {
-					JOptionPane.showMessageDialog(null, "Aviso: Não foi possivel atualizar. Imprimindo versão salva.");
-				}
 				RelatorioViagen r = new RelatorioViagen();
 				r.Gerar(selecionado.get(), taObs.getText());
 			}
