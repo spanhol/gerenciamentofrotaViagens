@@ -743,8 +743,7 @@ public class PainelPropriedadesViagem extends PainelPropriedades<ViagemDao, Viag
 		botoes.getChildren().add(0, relatorioViagem);
 		relatorioViagem.setOnAction((ActionEvent event) -> {
 			if (selecionado != null) {
-				RelatorioViagen r = new RelatorioViagen();
-				r.Gerar(selecionado.get(), taObs.getText());
+				RelatorioViagen.Gerar(selecionado.get(), taObs.getText());
 			}
 		});
 
@@ -913,8 +912,7 @@ public class PainelPropriedadesViagem extends PainelPropriedades<ViagemDao, Viag
 				dados = dao.filtrarViagem(getFiltroData(), getDatas(), null, fcMotorista.getSelectionModel().getSelectedItem().get(), getRegioesSelecionadas());
 			}
 			if (!dados.isEmpty()) {
-				RelatorioTabela r = new RelatorioTabela();
-				r.Gerar(dados, m, ftfDatacarregamento.getText(), getRegioesSelecionadas());
+				RelatorioTabela.gerar(dados, m, ftfDatacarregamento.getText(), getRegioesSelecionadas());
 			}
 		});
 

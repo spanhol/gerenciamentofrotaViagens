@@ -26,7 +26,6 @@ public class MainMenu extends Application {
 	double largura;
 	double altura;
 
-	Scene loading;
 	CadViagem cadastroViagem;
 	static final String tituloMainMenu = "SMMV";	//sistema movelmar de manutencao de viagens
 	Scene cadastroRegiao;

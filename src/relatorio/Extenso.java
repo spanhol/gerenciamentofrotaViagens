@@ -101,9 +101,9 @@ public class Extenso {
 		nro.clear();
 		if (num.equals(BigInteger.ZERO)) {
 			// Centavos.
-			nro.add(new Integer(0));
+			nro.add(0);
 			// Valor.
-			nro.add(new Integer(0));
+			nro.add(0);
 		} else {
 			// Adiciona centavos.
 			addRemainder(100);

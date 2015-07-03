@@ -4,14 +4,9 @@ import entidades.Motorista;
 import entidades.Regiao;
 import entidades.Viagem;
 import java.awt.Desktop;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,8 +23,20 @@ import javafx.collections.ObservableList;
  */
 public class RelatorioTabela {
 
-	String pagina;
-	String tabela
+	static File f = new File("C:\\Movelmar\\ControleViagens\\relatoriotabela.html");
+	static String pagina = "<!DOCTYPE html>\n"
+		+ "<html>\n"
+		+ "	<head>\n"
+		+ "		<title>CONTROLE DE VIAGENS</title>\n"
+		+ "		<meta charset=\"windows-1252\">\n"
+		+ "		<link rel=\"stylesheet\" type=\"text/css\" href=\"coluna.css\">\n"
+		+ "	</head>\n"
+		+ "	<body>\n"
+		+ "		<div class=\"nomerelatorio\">CONTROLE DE VIAGENS<br><br></div>\n"
+		+ "			@tabela@\n"
+		+ "	</body>\n"
+		+ "</html>";
+	static String tabela
 		= "<table>\n"
 		+ "			<col width=\"70\">\n"
 		+ "			<col width=\"100\">\n"
@@ -71,33 +78,15 @@ public class RelatorioTabela {
 		+ "			</tr>\n"
 		+ "</table>\n";
 
-	String t = "@tabela@";
-	String filtro = "@filtro@";
-	String dados = "@dados@";
-	String totalFrete = "@total@";
-	double sumFrete;
-	String totalComis = "@totalComis@";
-	double sumComis;
+	static String t = "@tabela@";
+	static String filtro = "@filtro@";
+	static String dados = "@dados@";
+	static String totalFrete = "@total@";
+	static double sumFrete;
+	static String totalComis = "@totalComis@";
+	static double sumComis;
 
-	public RelatorioTabela() {
-		BufferedReader bufferedReader = null;
-		StringBuilder sb = new StringBuilder();
-		try {
-			bufferedReader = new BufferedReader(new FileReader("C:\\ControleViagens\\modeloRelPeriodo.html"));
-			String line;
-			while ((line = bufferedReader.readLine()) != null) {
-				sb.append(line).append("\n");
-			}
-			bufferedReader.close();
-		} catch (FileNotFoundException ex) {
-			Logger.getLogger(RelatorioTabela.class.getName()).log(Level.SEVERE, null, ex);
-		} catch (IOException ex) {
-			Logger.getLogger(RelatorioTabela.class.getName()).log(Level.SEVERE, null, ex);
-		}
-		pagina = sb.toString();
-	}
-
-	public void Gerar(ObservableList<Viagem> v, ObservableList<Motorista> motoristas, String periodo, ArrayList<Regiao> regioes) {
+	public static void gerar(ObservableList<Viagem> v, ObservableList<Motorista> motoristas, String periodo, ArrayList<Regiao> regioes) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		StringBuilder total = new StringBuilder();
 		for (Motorista m : motoristas) {
@@ -176,7 +165,7 @@ public class RelatorioTabela {
 					+ "\t\t\t\t</tr>\n";
 			}
 
-			modelo = modelo.replace(this.filtro, tfiltro);
+			modelo = modelo.replace(filtro, tfiltro);
 			modelo = modelo.replace(dados, tabelaDados.toString());
 			modelo = modelo.replace(totalFrete, String.format("%,3.2f", sumFrete));
 			modelo = modelo.replace(totalComis, String.format("%,3.2f", sumComis));
@@ -187,20 +176,18 @@ public class RelatorioTabela {
 		}
 
 		pagina = pagina.replace(t, total.toString());
-		File f = new File("C:\\ControleViagens\\relatoriotabela.html");
 		try {
 			f.createNewFile();
-			try (PrintWriter out = new PrintWriter(f)) {
-				out.println(pagina);
-			}
-			Desktop d = Desktop.getDesktop();
-			d.browse(new URI("file:///C:/ControleViagens/relatoriotabela.html"));
-		} catch (URISyntaxException | IOException ex) {
+			PrintWriter out = new PrintWriter(f);
+			out.println(pagina);
+			out.close();
+			Desktop.getDesktop().browse(f.toURI());
+		} catch (IOException ex) {
 			Logger.getLogger(RelatorioTabela.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
 
-	public String formata(String str) {
+	public static String formata(String str) {
 		str = str.replace("é", "&eacute;");
 		str = str.replace("É", "&Eacute;");
 		str = str.replace("ã", "&atilde;");
@@ -211,7 +198,7 @@ public class RelatorioTabela {
 		return str;
 	}
 
-	public String formataData(String str) {
+	public static String formataData(String str) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
 		SimpleDateFormat mesapenas = new SimpleDateFormat("MMMMMMMMMMM/yyyy");
 		String res = "";
