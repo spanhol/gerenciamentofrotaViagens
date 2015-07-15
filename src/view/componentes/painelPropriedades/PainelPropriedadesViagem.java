@@ -1180,11 +1180,11 @@ public class PainelPropriedadesViagem extends PainelPropriedades<ViagemDao, Viag
 				acerto = acerto.substring(offset, offset + 4);
 				if (acerto.compareTo(String.valueOf(selecionado.getNumcontrole())) == 0) {
 					if (conta.getCtadeb() == 1984) {		//chapa
-						System.out.println("\nconta " + acerto + " chapa " + conta.getValor());
+//						System.out.println("\nconta " + acerto + " chapa " + conta.getValor());
 						chapa += conta.getValor();
 					}
 					if (conta.getCtadeb() == 1019) {		//adt
-						System.out.println("\nconta " + acerto + " val " + conta.getValor());
+//						System.out.println("\nconta " + acerto + " val " + conta.getValor());
 						adt += conta.getValor();
 					}
 				}
