@@ -47,7 +47,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import javax.swing.JOptionPane;
 import modelo.CustomDate;
 import relatorio.RelatorioTabela;
 import relatorio.RelatorioViagen;
@@ -165,28 +164,28 @@ public class PainelPropriedadesViagem extends PainelPropriedades<ViagemDao, Viag
 			limpaOutros();
 		} else {
 			selecionado = e;
-			tfId.setText(String.valueOf(e.getId()));
-			tfControle.setText(e.getNumcontrole().toString());
-			tfDatacarregamento.setText(sdf.format(e.getDatacarregamento()));
-			tfCarga.setText(e.getNumcarga().toString());
-			tfAdiantamento.setText(String.format("%,3.2f", e.getAdiantamento()));
-			tfChapa.setText(String.format("%,3.2f", e.getAdiantamentochapa()));
-			taObs.setText(e.getObs());
-			tfFrete.setText(String.format("%,3.2f", e.getFrete()));
-			tfComissao.setText(String.format("%,3.2f", e.getComissao()));
+			tfId.setText(String.valueOf(selecionado.getId()));
+			tfControle.setText(selecionado.getNumcontrole().toString());
+			tfDatacarregamento.setText(sdf.format(selecionado.getDatacarregamento()));
+			tfCarga.setText(selecionado.getNumcarga().toString());
+			tfAdiantamento.setText(String.format("%,3.2f", selecionado.getAdiantamento()));
+			tfChapa.setText(String.format("%,3.2f", selecionado.getAdiantamentochapa()));
+			taObs.setText(selecionado.getObs());
+			tfFrete.setText(String.format("%,3.2f", selecionado.getFrete()));
+			tfComissao.setText(String.format("%,3.2f", selecionado.getComissao()));
 
-			if (e.getIdmotorista() != null) {
+			if (selecionado.getIdmotorista() != null) {
 				for (MotoristaWrapper mw : motoristaW) {
-					if (mw.get().getId().compareTo(e.getIdmotorista().getId()) == 0) {
+					if (mw.get().getId().compareTo(selecionado.getIdmotorista().getId()) == 0) {
 						cMotorista.getSelectionModel().select(mw);
 						break;
 					}
 				}
 			}
 
-			if (e.getIdcaminhao() != null) {
+			if (selecionado.getIdcaminhao() != null) {
 				for (CaminhaoWrapper cw : caminhaoW) {
-					if (cw.get().getId().compareTo(e.getIdcaminhao().getId()) == 0) {
+					if (cw.get().getId().compareTo(selecionado.getIdcaminhao().getId()) == 0) {
 						cCaminhao.getSelectionModel().select(cw);
 						break;
 					}
@@ -195,7 +194,7 @@ public class PainelPropriedadesViagem extends PainelPropriedades<ViagemDao, Viag
 
 			for (RegiaoWrapper rs : listaRegiao) {
 				rs.selectedProperty().set(false);
-				for (Regiao rc : e.getRegiaoCollection()) {
+				for (Regiao rc : selecionado.getRegiaoCollection()) {
 					if (rs.get().getId().compareTo(rc.getId()) == 0) {
 						rs.selectedProperty().set(true);
 					}
@@ -743,7 +742,7 @@ public class PainelPropriedadesViagem extends PainelPropriedades<ViagemDao, Viag
 		botoes.getChildren().add(0, relatorioViagem);
 		relatorioViagem.setOnAction((ActionEvent event) -> {
 			if (selecionado != null) {
-				RelatorioViagen.Gerar(selecionado.get(), taObs.getText());
+				RelatorioViagen.gerar(selecionado.get(), taObs.getText());
 			}
 		});
 

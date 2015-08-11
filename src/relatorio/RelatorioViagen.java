@@ -7,8 +7,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,7 +18,7 @@ import java.util.logging.Logger;
 public class RelatorioViagen {
 
 	static File f = new File("C:\\Movelmar\\ControleViagens\\relatorio.html");
-	static String pagina = "<!DOCTYPE html>\n"
+	final static String paginaOriginal = "<!DOCTYPE html>\n"
 		+ "<html>\n"
 		+ "	<head>\n"
 		+ "		<title>Relatório Viagens</title>\n"
@@ -374,8 +372,11 @@ public class RelatorioViagen {
 	static String data = "@data@";
 	static String obs = "@obs@";
 
-	public static void Gerar(Viagem v, String observacao) {
+	static String pagina = paginaOriginal;
+
+	public static void gerar(Viagem v, String observacao) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		pagina = paginaOriginal;
 		pagina = pagina.replace(motorista, formata(v.getIdmotorista().getNome()));
 		pagina = pagina.replace(admissao, sdf.format(v.getIdmotorista().getAdmissao()));
 		pagina = pagina.replace(ctps, v.getIdmotorista().getCtps());
