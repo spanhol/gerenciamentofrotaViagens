@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  *
  * @author Fernando Spanhol
  */
-public class RelatorioViagen {
+public class RelatorioViagem {
 
 	static File f = new File("C:\\Movelmar\\ControleViagens\\relatorio.html");
 	final static String paginaOriginal = "<!DOCTYPE html>\n"
@@ -409,7 +409,7 @@ public class RelatorioViagen {
 			out.close();
 			Desktop.getDesktop().browse(f.toURI());
 		} catch (IOException ex) {
-			Logger.getLogger(RelatorioViagen.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(RelatorioViagem.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
 

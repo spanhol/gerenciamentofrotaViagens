@@ -49,7 +49,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import modelo.CustomDate;
 import relatorio.RelatorioTabela;
-import relatorio.RelatorioViagen;
+import relatorio.RelatorioViagem;
 import view.ModalDialog;
 import wrapper.ViagemWrapper;
 
@@ -676,10 +676,10 @@ public class PainelPropriedadesViagem extends PainelPropriedades<ViagemDao, Viag
 			}
 		});
 
-		caminhaoW = caminhaoDao.listarWapper(true);
+		caminhaoW = caminhaoDao.listarWrapper(true);
 		cCaminhao = new ComboBox<>();
 		cCaminhao.getItems().addAll(caminhaoW.filtered((CaminhaoWrapper t) -> t.get().getAtivo()));
-		motoristaW = motoristaDao.listarWapper();
+		motoristaW = motoristaDao.listarWrapper();
 		cMotorista = new ComboBox<>();
 		cMotorista.getItems().addAll(motoristaW.filtered((MotoristaWrapper t) -> t.get().getAtivo()));
 		cMotorista.valueProperty().addListener((ObservableValue<? extends MotoristaWrapper> observable, MotoristaWrapper oldValue, MotoristaWrapper newValue) -> {
@@ -718,9 +718,9 @@ public class PainelPropriedadesViagem extends PainelPropriedades<ViagemDao, Viag
 			}
 		});
 
-		caminhaoFiltro = caminhaoDao.listarWapper(true);
+		caminhaoFiltro = caminhaoDao.listarWrapper(true);
 		caminhaoFiltro.add(0, new CaminhaoWrapper(new Caminhao(-1)));
-		motoristaFiltro = motoristaDao.listarWapper();
+		motoristaFiltro = motoristaDao.listarWrapper();
 		motoristaFiltro.add(0, new MotoristaWrapper(new Motorista(-1)));
 
 		campos = new ArrayList<>();
@@ -742,7 +742,7 @@ public class PainelPropriedadesViagem extends PainelPropriedades<ViagemDao, Viag
 		botoes.getChildren().add(0, relatorioViagem);
 		relatorioViagem.setOnAction((ActionEvent event) -> {
 			if (selecionado != null) {
-				RelatorioViagen.gerar(selecionado.get(), taObs.getText());
+				RelatorioViagem.gerar(selecionado.get(), taObs.getText());
 			}
 		});
 
