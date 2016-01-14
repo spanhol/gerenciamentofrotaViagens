@@ -21,6 +21,7 @@ import javafx.stage.Stage;
  */
 public class MainMenu extends Application {
 
+	boolean teste;
 	//tela
 	Stage stage;
 	double largura;
