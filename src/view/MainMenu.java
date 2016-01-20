@@ -6,13 +6,11 @@ import view.telas.CadViagem;
 import view.telas.CadMotorista;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
@@ -23,8 +21,6 @@ public class MainMenu extends Application {
 
 	//tela
 	Stage stage;
-	double largura;
-	double altura;
 
 	CadViagem cadastroViagem;
 	static final String tituloMainMenu = "SMMV";	//sistema movelmar de manutencao de viagens
@@ -44,16 +40,11 @@ public class MainMenu extends Application {
 		stage = primaryStage;
 		BuildCadastroViagem();
 
-		Screen screen = Screen.getPrimary();
-		Rectangle2D bounds = screen.getVisualBounds();
-		stage.setX(0);
-		stage.setY(0);
-		stage.setWidth(bounds.getWidth());
-		largura = bounds.getWidth();
-		stage.setHeight(bounds.getHeight());
-		altura = bounds.getHeight();
 		stage.setTitle(tituloMainMenu);
 		stage.setScene(cadastroViagem);
+		stage.setWidth(1075);
+		stage.setHeight(650);
+		stage.setMaximized(true);
 		stage.show();
 	}
 
@@ -124,13 +115,5 @@ public class MainMenu extends Application {
 			cadastroMotorista = new CadMotorista(root);
 		}
 		stage.setScene(cadastroMotorista);
-	}
-
-	public double getLargura() {
-		return largura;
-	}
-
-	public double getAltura() {
-		return altura;
 	}
 }
