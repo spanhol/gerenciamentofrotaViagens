@@ -72,6 +72,6 @@ public class CadViagem extends SceneTabOverload {
 			}
 		});
 		hTabelaPropriedades.getChildren().addAll(propriedades, tabela);
-		main.getChildren().add(hTabelaPropriedades);
+		root.getChildren().add(hTabelaPropriedades);
 	}
 }

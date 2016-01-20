@@ -38,7 +38,7 @@ public class MainMenu extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		stage = primaryStage;
-		BuildCadastroViagem();
+		duildCadastroViagem();
 
 		stage.setTitle(tituloMainMenu);
 		stage.setScene(cadastroViagem);
@@ -48,7 +48,7 @@ public class MainMenu extends Application {
 		stage.show();
 	}
 
-	public MenuBar BuildMenuBar() {
+	public MenuBar buildMenuBar() {
 		//menubar
 		final Menu menuCad = new Menu("Cadastro");
 		final MenuItem menuCadViagens = new MenuItem("Viagens");
@@ -58,20 +58,20 @@ public class MainMenu extends Application {
 
 		MenuBar m = new MenuBar();
 		menuCadViagens.setOnAction((ActionEvent event) -> {
-			BuildCadastroViagem();
+			duildCadastroViagem();
 			stage.setTitle(tituloMainMenu);
 		});
 		menuCadMotorista.setOnAction((ActionEvent event) -> {
 			stage.setTitle(tituloCadastroMotorista);
-			BuildCadastroMotorista();
+			buildCadastroMotorista();
 		});
 		menuCadCaminhao.setOnAction((ActionEvent event) -> {
 			stage.setTitle(tituloCadastroCaminhao);
-			BuildCadastroCaminhao();
+			buildCadastroCaminhao();
 		});
 		menuCadRegiao.setOnAction((ActionEvent event) -> {
 			stage.setTitle(tituloCadastroRegiao);
-			BuildCadastroRegiao();
+			buildCadastroRegiao();
 		});
 		menuCad.getItems().addAll(menuCadViagens, menuCadMotorista, menuCadCaminhao, menuCadRegiao);
 
@@ -79,10 +79,10 @@ public class MainMenu extends Application {
 		return m;
 	}
 
-	public void BuildCadastroViagem() {
+	public void duildCadastroViagem() {
 		if (cadastroViagem == null) {
 			VBox root = new VBox();
-			root.getChildren().addAll(BuildMenuBar());
+			root.getChildren().addAll(buildMenuBar());
 			cadastroViagem = new CadViagem(root);
 			stage.setScene(cadastroViagem);
 		} else {
@@ -90,28 +90,28 @@ public class MainMenu extends Application {
 		}
 	}
 
-	public void BuildCadastroRegiao() {
+	public void buildCadastroRegiao() {
 		if (cadastroRegiao == null) {
 			VBox root = new VBox();
-			root.getChildren().addAll(BuildMenuBar());
+			root.getChildren().addAll(buildMenuBar());
 			cadastroRegiao = new CadRegiao(root);
 		}
 		stage.setScene(cadastroRegiao);
 	}
 
-	public void BuildCadastroCaminhao() {
+	public void buildCadastroCaminhao() {
 		if (cadastroCaminhao == null) {
 			VBox root = new VBox();
-			root.getChildren().addAll(BuildMenuBar());
+			root.getChildren().addAll(buildMenuBar());
 			cadastroCaminhao = new CadCaminhao(root);
 		}
 		stage.setScene(cadastroCaminhao);
 	}
 
-	public void BuildCadastroMotorista() {
+	public void buildCadastroMotorista() {
 		if (cadastroMotorista == null) {
 			VBox root = new VBox();
-			root.getChildren().addAll(BuildMenuBar());
+			root.getChildren().addAll(buildMenuBar());
 			cadastroMotorista = new CadMotorista(root);
 		}
 		stage.setScene(cadastroMotorista);

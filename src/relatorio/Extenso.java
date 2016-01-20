@@ -22,13 +22,13 @@ public class Extenso {
 	private BigInteger num;
 	private BigDecimal valorMonetario;
 
-	private String Qualificadores[][] = {{"centavo", "centavos"},
+	private String qualificadores[][] = {{"centavo", "centavos"},
 	{"", ""}, {"mil", "mil"}, {"milhão", "milhoes"},
 	{"bilhão", "bilhões"}, {"trilhão", "trilhões"},
 	{"quatrilhão", "quatrilhões"}, {"quintilhão", "quintilhões"},
 	{"sextilhão", "sextilhões"}, {"septilhão", "septilhões"}};
 
-	private String Numeros[][] = {
+	private String numeros[][] = {
 		{"zero", "um", "dois", "tr&ecirc;s", "quatro", "cinco", "seis", "sete",
 			"oito", "nove", "dez", "onze", "doze", "treze", "quatorze",
 			"quinze", "desesseis", "desessete", "dezoito", "desenove"},
@@ -90,7 +90,7 @@ public class Extenso {
 			throw new NumberFormatException(
 				"\nNao sao suportados numeros negativos ou maiores que 999 septilhoes para a conversao de valores monetarios."
 				+ "\nNumeros validos vao de 0,00 até 999.999.999.999.999.999.999.999.999,99"
-				+ "\nO numero informado foi: " + DecimalFormat());
+				+ "\nO numero informado foi: " + decimalFormat());
 		}
 
 		// Converte para inteiro arredondando os centavos.
@@ -152,7 +152,7 @@ public class Extenso {
 	 * Locale Default.
 	 * @since JDK 1.5
 	 */
-	public String DecimalFormat() {
+	public String decimalFormat() {
 		// A classe Formatter() incluida desde o JDK 1.5.0 tem que ser utilizada
 		// devido
 		// a class DecimalFormat() não suportar o tipo BigDecimal(),
@@ -182,7 +182,6 @@ public class Extenso {
 	public String toString() {
 		StringBuilder buf = new StringBuilder();
 
-		int numero = nro.get(0);
 		int ct;
 
 		for (ct = nro.size() - 1; ct > 0; ct--) {
@@ -382,9 +381,9 @@ public class Extenso {
 		if (numero != 0) {
 			if (centena != 0) {
 				if (dezena == 0 && centena == 1) {
-					buf.append(Numeros[2][0]);
+					buf.append(numeros[2][0]);
 				} else {
-					buf.append(Numeros[2][centena]);
+					buf.append(numeros[2][centena]);
 				}
 			}
 
@@ -393,20 +392,20 @@ public class Extenso {
 			}
 			if (dezena > 19) {
 				dezena /= 10;
-				buf.append(Numeros[1][dezena - 2]);
+				buf.append(numeros[1][dezena - 2]);
 				if (unidade != 0) {
 					buf.append(" e ");
-					buf.append(Numeros[0][unidade]);
+					buf.append(numeros[0][unidade]);
 				}
 			} else if (centena == 0 || dezena != 0) {
-				buf.append(Numeros[0][dezena]);
+				buf.append(numeros[0][dezena]);
 			}
 
 			buf.append(" ");
 			if (numero == 1) {
-				buf.append(Qualificadores[escala][0]);
+				buf.append(qualificadores[escala][0]);
 			} else {
-				buf.append(Qualificadores[escala][1]);
+				buf.append(qualificadores[escala][1]);
 			}
 		}
 
@@ -418,7 +417,7 @@ public class Extenso {
 		Extenso teste = new Extenso(new BigDecimal(55000.69));
 
 		// Mostra o número informado no formato de valor monetário.
-		System.out.println("Numero  : " + teste.DecimalFormat());
+		System.out.println("Numero  : " + teste.decimalFormat());
 
 		// Mostra o número informado no formato de valor por extenso.
 		System.out.println("Extenso : " + teste.toString());

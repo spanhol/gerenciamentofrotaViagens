@@ -388,9 +388,12 @@ public class RelatorioViagem {
 		pagina = pagina.replace(veiculo, v.getIdcaminhao().getPlaca());
 		pagina = pagina.replace(carregamento, sdf.format(v.getDatacarregamento()));
 		String dest = "";
+		StringBuilder buf = new StringBuilder();
+		
 		for (Regiao r : v.getRegiaoCollection()) {
-			dest = dest + formata(r.getNome()) + ", ";
+			buf.append(formata(r.getNome())).append(", ");
 		}
+		dest = buf.toString();
 		dest = dest.substring(0, dest.length() - 2);
 		pagina = pagina.replace(destino, dest);
 		pagina = pagina.replace(adiantamento, String.format("%,3.2f", v.getAdiantamento()));

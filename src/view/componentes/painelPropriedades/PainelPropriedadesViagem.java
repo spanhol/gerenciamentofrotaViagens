@@ -125,7 +125,7 @@ public class PainelPropriedadesViagem extends PainelPropriedades<ViagemDao, Viag
 		HBox numcarga = box("Carga", tfCarga);
 		HBox adiantamento = box("Adt", tfAdiantamento);
 		HBox adiantamentochapa = box("Chapa", tfChapa);
-		VBox obs = NovoTexto("Observações");
+		VBox obs = bovoTexto("Observações");
 		obs.setPadding(new Insets(10, 0, 0, 0));
 		HBox motorista = box("Motorista", cMotorista);
 		HBox caminhao = box("Caminhão", cCaminhao);
@@ -148,7 +148,7 @@ public class PainelPropriedadesViagem extends PainelPropriedades<ViagemDao, Viag
 		getChildren().addAll(tabs);
 	}
 
-	final public VBox NovoTexto(String texto) {
+	final public VBox bovoTexto(String texto) {
 		VBox re = new VBox();
 		Label lre = new Label(texto);
 		re.getChildren().addAll(lre, taObs);
@@ -213,7 +213,7 @@ public class PainelPropriedadesViagem extends PainelPropriedades<ViagemDao, Viag
 			if (tfId.getText().equals("")) {
 				erro = true;
 			}
-			Viagem temp = dao.getById(Integer.valueOf(tfId.getText()));
+			Viagem temp = dao.getById(Integer.parseInt(tfId.getText()));
 			if (temp == null) {
 				erro = true;
 			}
@@ -425,7 +425,7 @@ public class PainelPropriedadesViagem extends PainelPropriedades<ViagemDao, Viag
 				Viagem temp = null;
 				ViagemWrapper tempw;
 				if (tfControle.getText().compareTo("") != 0) {
-					temp = dao.getByControle(Integer.valueOf(tfControle.getText()));
+					temp = dao.getByControle(Integer.parseInt(tfControle.getText()));
 				}
 				if (temp != null) {
 					tempw = new ViagemWrapper(temp);
@@ -764,6 +764,8 @@ public class PainelPropriedadesViagem extends PainelPropriedades<ViagemDao, Viag
 			@Override
 			public void handle(KeyEvent event) {
 				switch (event.getCode()) {
+					default:
+						break;
 					case ENTER: {
 						taObs.requestFocus();
 						event.consume();
@@ -997,8 +999,8 @@ public class PainelPropriedadesViagem extends PainelPropriedades<ViagemDao, Viag
 			}
 			int separadorAte = -1;
 			int separadorAnd = -1;
-			separadorAte = separador.substring(indexSeparador, indexSeparador + 1).indexOf("|");
-			separadorAnd = separador.substring(indexSeparador, indexSeparador + 1).indexOf(",");
+			separadorAte = separador.substring(indexSeparador, indexSeparador + 1).indexOf('|');
+			separadorAnd = separador.substring(indexSeparador, indexSeparador + 1).indexOf(',');
 			if (datacount > 0) {
 				if (separadorAnd == -1 && separadorAte == -1) {
 					if (datacount == 1) {
@@ -1198,7 +1200,8 @@ public class PainelPropriedadesViagem extends PainelPropriedades<ViagemDao, Viag
 				tfChapa.setText(String.valueOf(chapa));
 				tfChapa.getStyleClass().add("auto");
 			} else {
-				if (Double.parseDouble(tfChapa.getText().replace(".", "").replace(",", ".")) != chapa) {
+				double ch = Double.parseDouble(tfChapa.getText().replace(".", "").replace(",", "."));
+				if (Math.abs(ch - chapa) < .0000001) {
 					tfChapa.getStyleClass().add("dif");
 				}
 			}
@@ -1209,7 +1212,8 @@ public class PainelPropriedadesViagem extends PainelPropriedades<ViagemDao, Viag
 				tfAdiantamento.setText(String.valueOf(adt));
 				tfAdiantamento.getStyleClass().add("auto");
 			} else {
-				if (Double.parseDouble(tfAdiantamento.getText().replace(".", "").replace(",", ".")) != adt) {
+				double ad = Double.parseDouble(tfAdiantamento.getText().replace(".", "").replace(",", "."));
+				if (Math.abs(ad - adt) < .0000001) {
 					tfAdiantamento.getStyleClass().add("dif");
 				}
 			}
