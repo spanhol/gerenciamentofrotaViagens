@@ -56,7 +56,8 @@ public class MainMenu extends Application {
 		final MenuItem menuCadCaminhao = new MenuItem("Caminhões");
 		final MenuItem menuCadRegiao = new MenuItem("Regiões");
 
-		MenuBar m = new MenuBar();
+		MenuBar menuBar = new MenuBar();
+		menuBar.setStyle("-fx-background-color: white;");
 		menuCadViagens.setOnAction((ActionEvent event) -> {
 			duildCadastroViagem();
 			stage.setTitle(tituloMainMenu);
@@ -75,8 +76,8 @@ public class MainMenu extends Application {
 		});
 		menuCad.getItems().addAll(menuCadViagens, menuCadMotorista, menuCadCaminhao, menuCadRegiao);
 
-		m.getMenus().addAll(menuCad);
-		return m;
+		menuBar.getMenus().addAll(menuCad);
+		return menuBar;
 	}
 
 	public void duildCadastroViagem() {
